@@ -22,6 +22,8 @@ func main() {
 		res, err = day2.Task1()
 	case "2+":
 		res, err = day2.Task2()
+	default:
+		err = fmt.Errorf("unknown task %s", task)
 	}
 
 	if err != nil {

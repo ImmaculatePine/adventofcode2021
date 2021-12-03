@@ -46,16 +46,7 @@ func parseCommand(str string) (*Command, error) {
 		return nil, fmt.Errorf("failed to parse value in %s", str)
 	}
 
-	switch fields[0] {
-	case "forward":
-		return &Command{"forward", val}, nil
-	case "up":
-		return &Command{"up", val}, nil
-	case "down":
-		return &Command{"down", val}, nil
-	default:
-		return nil, fmt.Errorf("unknown command %s", fields[0])
-	}
+	return &Command{fields[0], val}, nil
 }
 
 func Task1() (string, error) {
@@ -64,10 +55,15 @@ func Task1() (string, error) {
 		return "", err
 	}
 
-	return strconv.Itoa(task1(commands)), nil
+	result, err := task1(commands)
+	if err != nil {
+		return "", err
+	}
+
+	return strconv.Itoa(result), nil
 }
 
-func task1(commands []*Command) int {
+func task1(commands []*Command) (int, error) {
 	pos := 0
 	depth := 0
 
@@ -79,10 +75,12 @@ func task1(commands []*Command) int {
 			depth -= cmd.value
 		case "down":
 			depth += cmd.value
+		default:
+			return 0, fmt.Errorf("unknown command %s", cmd.direction)
 		}
 	}
 
-	return pos * depth
+	return pos * depth, nil
 }
 
 func Task2() (string, error) {
@@ -91,10 +89,15 @@ func Task2() (string, error) {
 		return "", err
 	}
 
-	return strconv.Itoa(task2(commands)), nil
+	result, err := task2(commands)
+	if err != nil {
+		return "", err
+	}
+
+	return strconv.Itoa(result), nil
 }
 
-func task2(commands []*Command) int {
+func task2(commands []*Command) (int, error) {
 	pos := 0
 	depth := 0
 	aim := 0
@@ -108,8 +111,10 @@ func task2(commands []*Command) int {
 			aim -= cmd.value
 		case "down":
 			aim += cmd.value
+		default:
+			return 0, fmt.Errorf("unknown command %s", cmd.direction)
 		}
 	}
 
-	return pos * depth
+	return pos * depth, nil
 }

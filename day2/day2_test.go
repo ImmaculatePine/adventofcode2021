@@ -16,6 +16,7 @@ func TestTask1(t *testing.T) {
 		{"forward", 2},
 	}
 
-	res := task1(cmds)
+	res, err := task1(cmds)
+	require.NoError(t, err)
 	require.Equal(t, res, 150)
 }
