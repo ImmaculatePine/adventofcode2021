@@ -49,18 +49,19 @@ func parseCommand(str string) (*Command, error) {
 	return &Command{fields[0], val}, nil
 }
 
-func Task1() (string, error) {
+func Task1() error {
 	commands, err := readCommands()
 	if err != nil {
-		return "", err
+		return err
 	}
 
 	result, err := task1(commands)
 	if err != nil {
-		return "", err
+		return err
 	}
 
-	return strconv.Itoa(result), nil
+	fmt.Println(result)
+	return nil
 }
 
 func task1(commands []*Command) (int, error) {
@@ -83,18 +84,19 @@ func task1(commands []*Command) (int, error) {
 	return pos * depth, nil
 }
 
-func Task2() (string, error) {
+func Task2() error {
 	commands, err := readCommands()
 	if err != nil {
-		return "", err
+		return err
 	}
 
 	result, err := task2(commands)
 	if err != nil {
-		return "", err
+		return err
 	}
 
-	return strconv.Itoa(result), nil
+	fmt.Println(result)
+	return nil
 }
 
 func task2(commands []*Command) (int, error) {

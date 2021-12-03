@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/ImmaculatePine/adventofcode2021/day1"
@@ -10,25 +11,22 @@ import (
 
 func main() {
 	task := os.Args[len(os.Args)-1]
-	var res string
 	var err error
 
 	switch task {
 	case "1":
-		res, err = day1.Task1()
+		err = day1.Task1()
 	case "1+":
-		res, err = day1.Task2()
+		err = day1.Task2()
 	case "2":
-		res, err = day2.Task1()
+		err = day2.Task1()
 	case "2+":
-		res, err = day2.Task2()
+		err = day2.Task2()
 	default:
 		err = fmt.Errorf("unknown task %s", task)
 	}
 
 	if err != nil {
-		panic(err)
+		log.Fatalf("%v", err)
 	}
-
-	fmt.Println(res)
 }

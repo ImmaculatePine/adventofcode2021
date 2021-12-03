@@ -1,15 +1,15 @@
 package day1
 
 import (
-	"strconv"
+	"fmt"
 
 	"github.com/ImmaculatePine/adventofcode2021/utils"
 )
 
-func Task1() (string, error) {
+func Task1() error {
 	input, err := utils.ReadInputInts("./day1/input.txt")
 	if err != nil {
-		return "", err
+		return err
 	}
 
 	result := 0
@@ -22,13 +22,14 @@ func Task1() (string, error) {
 		last = v
 	}
 
-	return strconv.Itoa(result), nil
+	fmt.Println(result)
+	return nil
 }
 
-func Task2() (string, error) {
+func Task2() error {
 	input, err := utils.ReadInputInts("./day1/input.txt")
 	if err != nil {
-		return "", err
+		return err
 	}
 
 	var window1 []int
@@ -57,7 +58,8 @@ func Task2() (string, error) {
 		}
 	}
 
-	return strconv.Itoa(result), nil
+	fmt.Println(result)
+	return nil
 }
 
 func sum(arr []int) (res int) {
