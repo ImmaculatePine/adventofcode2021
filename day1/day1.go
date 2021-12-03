@@ -1,38 +1,17 @@
-package main
+package day1
 
 import (
-	"fmt"
-	"log"
-	"os"
+	"strconv"
 
 	"github.com/ImmaculatePine/adventofcode2021/utils"
 )
 
-func main() {
+func Task1() (string, error) {
 	input, err := utils.ReadInputInts("./day1/input.txt")
 	if err != nil {
-		log.Fatalf("failed to read input, %v", err)
+		return "", err
 	}
 
-	switch os.Args[len(os.Args)-1] {
-	case "1":
-		result, err := GetNumberOfIncreases(input)
-		if err != nil {
-			log.Fatalf("task 1 failed, %v", err)
-		}
-		fmt.Println(result)
-	case "2":
-		result, err := GetNumberOfWindowIncreases(input)
-		if err != nil {
-			log.Fatalf("task 2 failed, %v", err)
-		}
-		fmt.Println(result)
-	default:
-		log.Fatalf("unknown task %s", os.Args[len(os.Args)-1])
-	}
-}
-
-func GetNumberOfIncreases(input []int) (int, error) {
 	result := 0
 	last := input[0]
 
@@ -43,10 +22,15 @@ func GetNumberOfIncreases(input []int) (int, error) {
 		last = v
 	}
 
-	return result, nil
+	return strconv.Itoa(result), nil
 }
 
-func GetNumberOfWindowIncreases(input []int) (int, error) {
+func Task2() (string, error) {
+	input, err := utils.ReadInputInts("./day1/input.txt")
+	if err != nil {
+		return "", err
+	}
+
 	var window1 []int
 	var window2 []int
 	result := 0
@@ -73,7 +57,7 @@ func GetNumberOfWindowIncreases(input []int) (int, error) {
 		}
 	}
 
-	return result, nil
+	return strconv.Itoa(result), nil
 }
 
 func sum(arr []int) (res int) {

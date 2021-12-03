@@ -1,4 +1,4 @@
-package main
+package day2
 
 import (
 	"testing"
@@ -16,7 +16,6 @@ func TestTask1(t *testing.T) {
 		{"forward", 2},
 	}
 
-	res, err := Task1(cmds)
-	require.NoError(t, err)
+	res := task1(cmds)
 	require.Equal(t, res, 150)
 }

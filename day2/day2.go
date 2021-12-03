@@ -1,9 +1,7 @@
-package main
+package day2
 
 import (
 	"fmt"
-	"log"
-	"os"
 	"strconv"
 	"strings"
 
@@ -15,37 +13,22 @@ type Command struct {
 	value     int
 }
 
-func main() {
+func readCommands() ([]*Command, error) {
 	input, err := utils.ReadInputStrings("./day2/input.txt")
 	if err != nil {
-		log.Fatalf("failed to read input, %v", err)
+		return nil, err
 	}
 
 	var commands []*Command
 	for _, line := range input {
 		cmd, err := parseCommand(line)
 		if err != nil {
-			log.Fatalf("failed to parse input, %v", err)
+			return nil, err
 		}
 		commands = append(commands, cmd)
 	}
 
-	switch os.Args[len(os.Args)-1] {
-	case "1":
-		result, err := Task1(commands)
-		if err != nil {
-			log.Fatalf("task 1 failed, %v", err)
-		}
-		fmt.Println(result)
-	case "2":
-		result, err := Task2(commands)
-		if err != nil {
-			log.Fatalf("task 2 failed, %v", err)
-		}
-		fmt.Println(result)
-	default:
-		log.Fatalf("unknown task %s", os.Args[len(os.Args)-1])
-	}
+	return commands, nil
 }
 
 func parseCommand(str string) (*Command, error) {
@@ -75,7 +58,16 @@ func parseCommand(str string) (*Command, error) {
 	}
 }
 
-func Task1(commands []*Command) (int, error) {
+func Task1() (string, error) {
+	commands, err := readCommands()
+	if err != nil {
+		return "", err
+	}
+
+	return strconv.Itoa(task1(commands)), nil
+}
+
+func task1(commands []*Command) int {
 	pos := 0
 	depth := 0
 
@@ -90,10 +82,19 @@ func Task1(commands []*Command) (int, error) {
 		}
 	}
 
-	return pos * depth, nil
+	return pos * depth
 }
 
-func Task2(commands []*Command) (int, error) {
+func Task2() (string, error) {
+	commands, err := readCommands()
+	if err != nil {
+		return "", err
+	}
+
+	return strconv.Itoa(task2(commands)), nil
+}
+
+func task2(commands []*Command) int {
 	pos := 0
 	depth := 0
 	aim := 0
@@ -110,5 +111,5 @@ func Task2(commands []*Command) (int, error) {
 		}
 	}
 
-	return pos * depth, nil
+	return pos * depth
 }
