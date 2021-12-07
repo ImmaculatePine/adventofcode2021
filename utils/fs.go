@@ -2,8 +2,10 @@ package utils
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strconv"
+	"strings"
 )
 
 func ReadInputStrings(path string) ([]string, error) {
@@ -38,4 +40,28 @@ func ReadInputInts(path string) ([]int, error) {
 	}
 
 	return vals, nil
+}
+
+func ReadInputAsCommaSeparatedInts(path string) ([]int, error) {
+	input, err := ReadInputStrings(path)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(input) != 1 {
+		return nil, fmt.Errorf("unexpected number of input lines %d", len(input))
+	}
+
+	parts := strings.Split(input[0], ",")
+	result := []int{}
+
+	for _, part := range parts {
+		val, err := strconv.Atoi(part)
+		if err != nil {
+			return nil, err
+		}
+		result = append(result, val)
+	}
+
+	return result, nil
 }
