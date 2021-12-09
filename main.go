@@ -13,6 +13,7 @@ import (
 	"github.com/ImmaculatePine/adventofcode2021/day6"
 	"github.com/ImmaculatePine/adventofcode2021/day7"
 	"github.com/ImmaculatePine/adventofcode2021/day8"
+	"github.com/ImmaculatePine/adventofcode2021/day9"
 )
 
 func main() {
@@ -52,6 +53,10 @@ func main() {
 		err = day8.Task1()
 	case "8+":
 		err = day8.Task2()
+	case "9":
+		err = day9.Task1()
+	case "9+":
+		err = day9.Task2()
 	default:
 		err = fmt.Errorf("unknown task %s", task)
 	}
